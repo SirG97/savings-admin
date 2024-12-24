@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - staging
-
   workflow_dispatch:
 
 jobs:
@@ -12,47 +11,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      # Step 3: Install dependencies and build project
-      - name: Install dependencies and build
+      - name: Install dependencies with legacy peer deps
         run: |
-          npm ci
+          npm install --legacy-peer-deps
+
+      - name: Build React app
+        run: |
           npm run build
 
-      # Step 4: Deploy to Namecheap server
       - name: Deploy to server
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            # Navigate to the directory for the subdomain
             cd ~/staging-admin.divineglobalgrowth.com
-            # Backup old files (optional)
-            mkdir -p backup && mv * backup/
-            # Clean up old files
             rm -rf *
-            # Upload new files from GitHub Actions
-            exit  # End the script here
-            
-      # Step 5: Upload build files via SCP
-      - name: Upload new build files
-        uses: appleboy/scp-action@v0.1.6
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: 22
-          source: build/
-          target: ~/staging-admin.divineglobalgrowth.com
+            mkdir -p build
+            scp -r build/* .
+            echo "Deployment successful!"
