@@ -2,7 +2,7 @@ import { Modal } from "flowbite-react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { TextInput } from "../../../components/inputs/TextInput";
 // import SelectInput from "../../../components/inputs/SelectInput";
 import { useForm } from "react-hook-form";
@@ -32,10 +32,8 @@ export default function CreateEmployee({ active, onClose, onCreated }) {
   const dispatch = useDispatch();
   const [branches, setBranches] = useState([]);
   const {
-    control,
     register,
     handleSubmit,
-    watch,
     reset,
     formState: { errors },
   } = useForm({
@@ -48,7 +46,7 @@ export default function CreateEmployee({ active, onClose, onCreated }) {
 
   useEffect(() => {
     fetchBranches();
-  }, []);
+  });
 
   const handleCreateEmployee = (data) => {
     createEmployee(dispatch, data).then((resp) => {

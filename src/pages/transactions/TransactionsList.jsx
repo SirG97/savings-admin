@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import {
   ChevronDownIcon,
@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { EyeIcon } from "@heroicons/react/24/outline";
 
-import { CalendarDateRangeIcon, PlusIcon } from "@heroicons/react/24/solid";
+import { CalendarDateRangeIcon } from "@heroicons/react/24/solid";
 import Pagination from "../../components/pagination/Pagination";
 
 const people = [
@@ -130,7 +130,7 @@ const people = [
 ];
 
 export default function RecipientList() {
-  const [openRecipientModal, setOpenRecipientModal] = useState(false);
+
   return (
     <div className="mt-4 rounded-xl bg-white pt-4 shadow-sm">
       <div className="flex justify-between px-4 py-2 sm:items-center sm:px-6 lg:px-4">
@@ -177,36 +177,32 @@ export default function RecipientList() {
             >
               <div className="py-1">
                 <MenuItem>
-                  <a
-                    href="#"
+                  <button
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                   >
                     Pending
-                  </a>
+                  </button>
                 </MenuItem>
                 <MenuItem>
-                  <a
-                    href="#"
+                  <button
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                   >
                     In processing
-                  </a>
+                  </button>
                 </MenuItem>
                 <MenuItem>
-                  <a
-                    href="#"
+                  <button
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                   >
                     Successful
-                  </a>
+                  </button>
                 </MenuItem>
                 <MenuItem>
-                  <a
-                    href="#"
+                  <button
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                   >
                     Failed
-                  </a>
+                  </button>
                 </MenuItem>
               </div>
             </MenuItems>
@@ -230,36 +226,32 @@ export default function RecipientList() {
             >
               <div className="py-1">
                 <MenuItem>
-                  <a
-                    href="#"
+                  <button
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                   >
                     Pending
-                  </a>
+                  </button>
                 </MenuItem>
                 <MenuItem>
-                  <a
-                    href="#"
+                  <button
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                   >
                     In processing
-                  </a>
+                  </button>
                 </MenuItem>
                 <MenuItem>
-                  <a
-                    href="#"
+                  <button
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                   >
                     Successful
-                  </a>
+                  </button>
                 </MenuItem>
                 <MenuItem>
-                  <a
-                    href="#"
+                  <button
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                   >
                     Failed
-                  </a>
+                  </button>
                 </MenuItem>
               </div>
             </MenuItems>
@@ -283,36 +275,32 @@ export default function RecipientList() {
             >
               <div className="py-1">
                 <MenuItem>
-                  <a
-                    href="#"
+                  <button
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                   >
                     Pending
-                  </a>
+                  </button>
                 </MenuItem>
                 <MenuItem>
-                  <a
-                    href="#"
+                  <button
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                   >
                     In processing
-                  </a>
+                  </button>
                 </MenuItem>
                 <MenuItem>
-                  <a
-                    href="#"
+                  <button
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                   >
                     Successful
-                  </a>
+                  </button>
                 </MenuItem>
                 <MenuItem>
-                  <a
-                    href="#"
+                  <button
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
                   >
                     Failed
-                  </a>
+                  </button>
                 </MenuItem>
               </div>
             </MenuItems>

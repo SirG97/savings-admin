@@ -14,7 +14,7 @@ numeral.defaultFormat("$0,0.00");
 export default function CustomersList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [openModal, setOpenModal] = useState(false);
+
   const [customers, setCustomers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -196,7 +196,7 @@ export default function CustomersList() {
                       </td>
 
                       <td className="relative whitespace-nowrap py-5 pl-3 pr-2 text-center text-sm font-medium sm:pr-4">
-                        <a
+                        <button
                           onClick={() => navigate(`/customer/${customer.id}`)}
                           className="cursor-pointer text-indigo-600 hover:text-indigo-900"
                         >
@@ -204,7 +204,7 @@ export default function CustomersList() {
                           <span className="sr-only">
                             ,{customer?.surname} {customer?.first_name}
                           </span>
-                        </a>
+                        </button>
                       </td>
                     </tr>
                   ))}

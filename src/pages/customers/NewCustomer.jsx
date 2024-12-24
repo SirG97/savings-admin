@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { TextInput } from "../../components/inputs/TextInput";
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import { ChevronDownIcon } from "@heroicons/react/16/solid";
 import { createCustomer } from "../../apis/Customers";
 import { getBranches } from "../../apis/Branches";
 import { Toaster, toast } from "sonner";
@@ -36,10 +34,8 @@ export default function NewCustomer() {
   const dispatch = useDispatch();
   const [branches, setBranches] = useState([]);
   const {
-    control,
     register,
     handleSubmit,
-    watch,
     reset,
     formState: { errors },
   } = useForm({
@@ -48,7 +44,7 @@ export default function NewCustomer() {
 
   useEffect(() => {
     fetchBranches();
-  }, []);
+  });
 
   const fetchBranches = () => {
     getBranches(dispatch)

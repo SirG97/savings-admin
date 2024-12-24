@@ -13,33 +13,23 @@ import {
 import {
   Bars3Icon,
   BellIcon,
-  CalendarIcon,
   ChartPieIcon,
   Cog6ToothIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
   HomeIcon,
   UsersIcon,
   XMarkIcon,
-  BuildingStorefrontIcon,
   ArrowRightStartOnRectangleIcon,
   BanknotesIcon,
   UserGroupIcon,
   Square3Stack3DIcon,
-  ScaleIcon,
   ShieldCheckIcon,
 } from "@heroicons/react/24/outline";
 import {
   ChevronDownIcon,
-  MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
 import { Toaster } from "sonner";
 
-const teams = [
-  { id: 1, name: "Heroicons", href: "#", initial: "H", current: false },
-  { id: 2, name: "Tailwind Labs", href: "#", initial: "T", current: false },
-  { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
-];
+
 const userNavigation = [
   { name: "Your profile", href: "#" },
   { name: "Sign out", href: "#" },
@@ -137,9 +127,9 @@ export default function AppLayout({ children }) {
                   />
                 </div>
                 <nav className="flex flex-1 flex-col">
-                  <ul role="list" className="flex flex-1 flex-col gap-y-7">
+                  <ul  className="flex flex-1 flex-col gap-y-7">
                     <li>
-                      <ul role="list" className="-mx-2 space-y-1">
+                      <ul  className="-mx-2 space-y-1">
                         {navigation.map((item) => (
                           <li key={item.name}>
                             <a

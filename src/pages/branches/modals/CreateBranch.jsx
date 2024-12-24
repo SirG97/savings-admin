@@ -1,7 +1,7 @@
 import { Modal } from "flowbite-react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useState } from "react";
+
 import { useDispatch } from "react-redux";
 import { TextInput } from "../../../components/inputs/TextInput";
 import { useForm } from "react-hook-form";
@@ -16,12 +16,9 @@ const schema = yup
 
 export default function CreateBranch({ active, onClose, onBranchCreated }) {
   const dispatch = useDispatch();
-  const [firstStep, setFirstStep] = useState(true);
   const {
-    control,
     register,
     handleSubmit,
-    watch,
     reset,
     formState: { errors },
   } = useForm(schema);
