@@ -1,16 +1,11 @@
 "use client";
 
-import { Fragment, useState } from "react";
-import { Tabs } from "flowbite-react";
+import { useState } from "react";
 import {
   ArrowDownCircleIcon,
   ArrowPathIcon,
   ArrowUpCircleIcon,
-  Bars3Icon,
-  EllipsisHorizontalIcon,
-  PlusSmallIcon,
 } from "@heroicons/react/20/solid";
-import { BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import AppLayout from "../../components/layout/AppLayout";
 
 const navigation = [

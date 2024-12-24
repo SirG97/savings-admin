@@ -1,12 +1,12 @@
-import { Button, Checkbox, Label, Modal } from "flowbite-react";
+import { Modal } from "flowbite-react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TextInput } from "../../../components/inputs/TextInput";
-import SelectInput from "../../../components/inputs/SelectInput";
-import { useForm, Controller } from "react-hook-form";
-import { getEmployees, createEmployee } from "../../../apis/Employees";
+// import SelectInput from "../../../components/inputs/SelectInput";
+import { useForm } from "react-hook-form";
+import { createEmployee } from "../../../apis/Employees";
 import { getBranches } from "../../../apis/Branches";
 import { Toaster, toast } from "sonner";
 import Select from "../../../components/inputs/Select";
@@ -24,9 +24,7 @@ const schema = yup
       .string()
       // .matches(/(admin|marketer)/,"")
       .required("user type is required"),
-      branch_id: yup
-      .string()
-      .required("Branch is required"),
+    branch_id: yup.string().required("Branch is required"),
   })
   .required();
 
@@ -90,7 +88,7 @@ export default function CreateEmployee({ active, onClose, onCreated }) {
 
   return (
     <>
-      <Toaster position="top-right"  richColors />
+      <Toaster position="top-right" richColors />
       <Modal show={active} size="md" onClose={onCloseModal} popup>
         <Modal.Header />
         <Modal.Body>

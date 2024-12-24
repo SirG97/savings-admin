@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { EyeIcon } from "@heroicons/react/24/outline";
-import { EyeSlashIcon } from "@heroicons/react/24/outline";
+// import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import FundWallet from "./modals/FundWallet";
 import Withdraw from "./modals/Withdraw";
 import tether from "../../assets/icons/tether.svg";
@@ -60,7 +60,7 @@ export default function WalletStats() {
           <dd className="w-full flex-none text-3xl/10 font-medium tracking-tight text-gray-900">
             {stat.value}
           </dd>
-          {stat.name == "Total assets" && (
+          {stat.name === "Total assets" && (
             <>
               <div className="text-sm">Balance</div>
             </>

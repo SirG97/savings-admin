@@ -3,16 +3,11 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { PaperClipIcon } from "@heroicons/react/20/solid";
 import {
-  BriefcaseIcon,
-  CalendarIcon,
   CheckIcon,
-  ChevronDownIcon,
-  CurrencyDollarIcon,
   LinkIcon,
-  MapPinIcon,
   PencilIcon,
 } from "@heroicons/react/20/solid";
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+
 import { getCustomer } from "../../apis/Customers";
 import { toast } from "sonner";
 import AppLayout from "../../components/layout/AppLayout";
@@ -53,7 +48,7 @@ export default function Customer() {
   const navigate = useNavigate();
   const [customer, setCustomer] = useState([]);
   const [id, setId] = useState();
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchCustomer();

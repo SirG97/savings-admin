@@ -1,10 +1,8 @@
-import { Button, Checkbox, Label, Modal} from "flowbite-react";
-import { useState, useEffect } from "react";
+import { Button, Modal} from "flowbite-react";
 import {TextInput} from "../../../components/inputs/TextInput";
 import SelectInput from "../../../components/inputs/SelectInput";
 
 export default function CreateWallet({ active, onClose }) {
-  const [email, setEmail] = useState("");
 
   function onCloseModal() {
     onClose();

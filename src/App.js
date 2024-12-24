@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import { setUserInfo, setUserToken, setLoginState, logoutUser } from './redux-store/AuthSlice';
 import { useDispatch, useSelector } from 'react-redux';
 // import jwt_decode from 'jwt-decode';
@@ -8,8 +8,8 @@ import Wallets from './pages/wallets/Wallets';
 import Branches from './pages/branches/Branches';
 import Transactions from './pages/transactions/Transactions';
 import Login from './pages/auth/Login';
-import InitialLogin from './pages/auth/InitialLogin';
-import { jwtDecode } from "jwt-decode";
+// import InitialLogin from './pages/auth/InitialLogin';
+// import { jwtDecode } from "jwt-decode";
 import Branch from './pages/branches/Branch';
 import Employees from './pages/employees/Employees';
 import Customers from './pages/customers/Customers';
@@ -43,8 +43,8 @@ const App = () => {
   
   if (selector.loggedIn) {
       // console.log(localStorage.getItem("token"))
-      
-      if (!localStorage.getItem("token")) {
+    
+      if (!token) {
         dispatch(logoutUser());
         navigate('/login');
       }

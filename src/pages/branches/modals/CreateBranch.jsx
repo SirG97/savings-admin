@@ -1,12 +1,11 @@
-import { Button, Checkbox, Label, Modal } from "flowbite-react";
+import { Modal } from "flowbite-react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { TextInput } from "../../../components/inputs/TextInput";
-import SelectInput from "../../../components/inputs/SelectInput";
-import { useForm, Controller } from "react-hook-form";
-import { getBranches, createBranch } from "../../../apis/Branches";
+import { useForm } from "react-hook-form";
+import { createBranch } from "../../../apis/Branches";
 import { Toaster, toast } from "sonner";
 const schema = yup
   .object({
