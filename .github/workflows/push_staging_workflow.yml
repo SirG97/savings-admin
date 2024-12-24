@@ -4,39 +4,52 @@ on:
   push:
     branches:
       - staging
-  workflow_dispatch:
 
 jobs:
-  build_and_deploy:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.13.1'
+          node-version: 18
 
-      - name: Install dependencies with legacy peer deps
-        run: |
-          npm install --legacy-peer-deps
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Build React app
-        run: |
-          CI=false npm run build
+      - name: Build React App
+        run: CI=false npm run build
 
       - name: Deploy to server
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
-          port: 21098
+          port: 21098  # SSH port for Namecheap shared hosting
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
+            # Install nvm if not already installed
+            if [ ! -d "$HOME/.nvm" ]; then
+              curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+            fi
+            
+            # Source nvm and install Node.js
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 18
+            nvm use 18
+            
+            # Navigate to deployment directory
+            mkdir -p ~/staging-admin.divineglobalgrowth.com
             cd ~/staging-admin.divineglobalgrowth.com
+            
+            # Clean up existing files
             rm -rf *
-            mkdir -p build
-            scp -r build/* .
-            echo "Deployment successful!"
+            
+            # Upload new build files
+            scp -r build/* $HOME/staging-admin.divineglobalgrowth.com
+            
+            echo "Deployment complete"
