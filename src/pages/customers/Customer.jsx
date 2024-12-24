@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { PaperClipIcon } from "@heroicons/react/20/solid";
 import {
   CheckIcon,
   LinkIcon,
   PencilIcon,
 } from "@heroicons/react/20/solid";
-
 import { getCustomer } from "../../apis/Customers";
 import { toast } from "sonner";
 import AppLayout from "../../components/layout/AppLayout";
@@ -48,7 +46,7 @@ export default function Customer() {
   const navigate = useNavigate();
   const [customer, setCustomer] = useState([]);
   const [id, setId] = useState();
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchCustomer();
