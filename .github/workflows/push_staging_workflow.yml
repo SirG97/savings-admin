@@ -31,25 +31,10 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            # Install nvm if not already installed
-            if [ ! -d "$HOME/.nvm" ]; then
-              curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-            fi
-            
-            # Source nvm and install Node.js
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 18
-            nvm use 18
-            
-            # Navigate to deployment directory
-            mkdir -p ~/staging-admin.divineglobalgrowth.com
             cd ~/staging-admin.divineglobalgrowth.com
-            
-            # Clean up existing files
-            rm -rf *
-            
-            # Upload new build files
-            scp -r build/* $HOME/staging-admin.divineglobalgrowth.com
-            
-            echo "Deployment complete"
+            git pull origin staging
+            nvm install 20.13.1
+            nvm use 20.13.1
+            npm install --legacy-peer-deps
+            npm run build
+            echo "Deployment successful!"
