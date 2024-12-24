@@ -1,11 +1,10 @@
-import { useState, useEffect, useCallback } from "react";
-import { Button, Checkbox, Label, Modal } from "flowbite-react";
+import { useState, useCallback } from "react";
+import { Button, Modal } from "flowbite-react";
 import {TextInput} from "../../../components/inputs/TextInput";
 import SelectInput from "../../../components/inputs/SelectInput";
 import TextInputDropdown from "../../../components/inputs/TextInputDropdown";
 import updown from '../../../assets/icons/updown.svg'
 export default function SendMoney({ active, onClose }) {
-  const [email, setEmail] = useState("");
 
   function onCloseModal() {
     onClose();
