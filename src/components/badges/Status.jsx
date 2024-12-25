@@ -14,8 +14,8 @@ export default function StatusBadge({ status, text }) {
 
       {status === "success" && (
         <span className="inline-flex items-center rounded-md bg-green-100 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-          {text}
-        </span>
+        {text}
+        </span> 
       )}
       {status === "primary" && (
         <span className="inline-flex items-center rounded-md bg-purple-100 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">
