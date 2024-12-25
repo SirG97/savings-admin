@@ -31,10 +31,31 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
+            # Navigate to deployment directory
+            mkdir -p ~/staging-admin.divineglobalgrowth.com
             cd ~/staging-admin.divineglobalgrowth.com
-            git pull origin staging
+            
+            # Initialize Git repository if not already done
+            if [ ! -d ".git" ]; then
+              git init
+              git remote add origin https://github.com/your-repo.git
+            fi
+
+            # Pull latest code from the staging branch
+            git fetch origin
+            git reset --hard origin/staging
+            
+            # Install Node.js using nvm
+            if [ ! -d "$HOME/.nvm" ]; then
+              curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+            fi
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 20.13.1
             nvm use 20.13.1
+            
+            # Install dependencies and build the React app
             npm install --legacy-peer-deps
             npm run build
+            
             echo "Deployment successful!"
