@@ -17,7 +17,7 @@ jobs:
           CI=false npm run build
 
       - name: Deploy to server via SFTP
-        uses: webfactory/ftp-deploy-action@v1.0.1
+        uses: ephread/ftp-deploy-action@v1.0.0
         with:
           server: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
@@ -25,4 +25,4 @@ jobs:
           protocol: sftp
           port: 21098  # SFTP port for Namecheap shared hosting
           local-dir: ./build  # Path to the build folder on your local machine
-          remote-dir: ~/staging-admin.divineglobalgrowth.com  # Replace with your server's target directory
+          remote-dir: /home/username/staging-admin.divineglobalgrowth.com  # Replace with your server's target directory
