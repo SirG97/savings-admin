@@ -17,7 +17,7 @@ jobs:
           CI=false npm run build
 
       - name: Deploy to server via SFTP
-        uses: appleboy/sftp-action@v0.1.4
+        uses: webfactory/ftp-deploy-action@v1.0.1
         with:
           host: ${{ secrets.HOST }}
           port: ${{ secrets.PORT }}  # SSH/SFTP port for Namecheap shared hosting (ensure this is correct)
