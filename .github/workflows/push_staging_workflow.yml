@@ -20,5 +20,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: 21098  # SSH port for Namecheap shared hosting
           localDir: ./build  # Path to the build folder on your local machine
-          remoteDir: ~/staging-admin.divineglobalgrowth.com  # Remote directory on the server
-          
+          remoteDir: /home/divimmud/staging-admin.divineglobalgrowth.com  # Remote directory on the server
+
