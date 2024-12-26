@@ -17,12 +17,10 @@ jobs:
           CI=false npm run build
 
       - name: Deploy to server via SFTP
-        uses: ephread/ftp-deploy-action@v1.0.0
+        uses: SamKirkland/FTP-Deploy-Action@v5
         with:
-          server: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          protocol: sftp
-          port: 21098  # SFTP port for Namecheap shared hosting
+          ftp-server: sftp://${{ secrets.HOST }}:21098  # Replace with your SFTP server address and port
+          ftp-username: ${{ secrets.USERNAME }}
+          ftp-password: ${{ secrets.PASSWORD }}
           local-dir: ./build  # Path to the build folder on your local machine
-          remote-dir: /home/username/staging-admin.divineglobalgrowth.com  # Replace with your server's target directory
+          remote-dir: ~/staging-admin.divineglobalgrowth.com  # Replace with your server's target directory
