@@ -19,9 +19,10 @@ jobs:
       - name: Deploy to server via SFTP
         uses: webfactory/ftp-deploy-action@v1.0.1
         with:
-          host: ${{ secrets.HOST }}
-          port: ${{ secrets.PORT }}  # SSH/SFTP port for Namecheap shared hosting (ensure this is correct)
+          server: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: "./build/*"  # Path to the build folder on your local machine
-          target: "~/staging-admin.divineglobalgrowth.com"  # Replace with your server's target directory
+          protocol: sftp
+          port: 21098  # SFTP port for Namecheap shared hosting
+          local-dir: ./build  # Path to the build folder on your local machine
+          remote-dir: ~/staging-admin.divineglobalgrowth.com  # Replace with your server's target directory
