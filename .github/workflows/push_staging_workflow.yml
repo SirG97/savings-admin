@@ -8,29 +8,20 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy to server
-        uses: appleboy/ssh-action@v0.1.4
+      - name: Build React App Locally
+        run: |
+          CI=false npm run build
+
+      - name: Deploy to server via SFTP
+        uses: appleboy/sftp-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
-          port: 21098
+          port: ${{ secrets.PORT }}  # SSH/SFTP port for Namecheap shared hosting (ensure this is correct)
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          script: |
-            # Navigate to the directory where you want to upload the build files
-            cd ~/staging-admin.divineglobalgrowth.com
-
-            # Clean up old build (ensure folder is empty)
-            rm -rf *
-
-            # Create the build directory (if it doesn't exist)
-            mkdir -p build
-
-            # Upload build folder content from GitHub workspace to server
-            scp -r $GITHUB_WORKSPACE/build/* $USER@${{ secrets.HOST }}:/home/username/staging-admin.divineglobalgrowth.com/build/
-
-            echo "Deployment successful!"
+          source: "./build/*"  # Path to the build folder on your local machine
+          target: "~/staging-admin.divineglobalgrowth.com"  # Replace with your server's target directory
