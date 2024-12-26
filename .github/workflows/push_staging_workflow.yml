@@ -12,15 +12,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Build React App Locally
-        run: |
-          CI=false npm run build
-
-      - name: Deploy to server via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v5
+      - name: Upload build folder to server via SFTP
+        uses: wangyucode/sftp-upload-action@v1
         with:
-          ftp-server: sftp://${{ secrets.HOST }}:21098  # Replace with your SFTP server address and port
-          ftp-username: ${{ secrets.USERNAME }}
-          ftp-password: ${{ secrets.PASSWORD }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: 21098  # SSH port for Namecheap shared hosting
           local-dir: ./build  # Path to the build folder on your local machine
-          remote-dir: ~/staging-admin.divineglobalgrowth.com  # Replace with your server's target directory
+          remote-dir: ~/staging-admin.divineglobalgrowth.com  # Remote directory on the server
