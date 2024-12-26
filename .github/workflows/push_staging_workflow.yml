@@ -24,21 +24,10 @@ jobs:
         run: CI=false npm run build
 
       - name: Deploy to server
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: ${{ secrets.HOST }}
-          port: 21098  # SSH port for Namecheap shared hosting
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          script: |
-            # Navigate to deployment directory
-            mkdir -p ~/staging-admin.divineglobalgrowth.com
-            cd ~/staging-admin.divineglobalgrowth.com
-            
-            # Remove existing files
-            rm -rf *
+        env:
+          RSYNC_RSH: "ssh -p 21098"
+        run: |
+          # Upload the contents of the build folder to the server
+          rsync -avz --delete ./build/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/staging-admin.divineglobalgrowth.com/
 
-            # Upload the build folder contents
-            scp -r ./build/* ~/staging-admin.divineglobalgrowth.com/
-
-            echo "Deployment successful!"
+          echo "Deployment successful!"
