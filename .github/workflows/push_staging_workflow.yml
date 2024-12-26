@@ -25,7 +25,7 @@ jobs:
 
       - name: Deploy to server
         env:
-          RSYNC_RSH: "ssh -p 21098"
+          RSYNC_RSH: "ssh -o StrictHostKeyChecking=no -p 21098"
         run: |
           # Upload the contents of the build folder to the server
           rsync -avz --delete ./build/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/staging-admin.divineglobalgrowth.com/
