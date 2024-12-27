@@ -46,7 +46,7 @@ export default function CreateEmployee({ active, onClose, onCreated }) {
 
   useEffect(() => {
     fetchBranches();
-  });
+  },[]);
 
   const handleCreateEmployee = (data) => {
     createEmployee(dispatch, data).then((resp) => {

@@ -21,9 +21,10 @@ export default function EmployeesList() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+
     fetchLatestEmployees();
   
-  });
+  },[]);
 
   const fetchLatestEmployees = () => {
     setIsLoading(true);

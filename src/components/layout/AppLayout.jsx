@@ -55,7 +55,7 @@ export default function AppLayout({ children }) {
       icon: Square3Stack3DIcon,
       current: false,
     },
-    { name: "Staff", href: "/staff", icon: UsersIcon, current: false },
+    { name: "Employees", href: "/employees", icon: UsersIcon, current: false },
     {
       name: "Customers",
       href: "/customers",

@@ -69,7 +69,7 @@ const App = () => {
         <Route exact path="/" element={<Dashboard />} />
         <Route exact path="/branches" element={<Branches />} />
         <Route exact path="/branches/:id" element={<Branch />} />
-        <Route exact path="/staff" element={<Employees />} />
+        <Route exact path="/employees" element={<Employees />} />
         <Route exact path="/customers" element={<Customers />} />
         <Route exact path="/customers/new" element={<NewCustomer />} />
         <Route exact path="/customer/:id" element={<Customer />} />

@@ -3,34 +3,34 @@ import AppLayout from "../../components/layout/AppLayout";
 const stats = [
   {
     name: "Customers",
-    value: "405,091.00",
-    change: "+4.75%",
+    value: "0",
+    change: "",
     changeType: "positive",
   },
   {
     name: "Balance",
-    value: "$1,120,000.00",
-    change: "+54.02%",
+    value: "₦0.00",
+    change: "0",
     changeType: "negative",
   },
   {
     name: "Deposits",
-    value: "$245,988.00",
-    change: "-1.39%",
+    value: "₦0.00",
+    change: "0",
     changeType: "positive",
   },
   {
     name: "Withdrawals",
-    value: "$30,156.00",
-    change: "+10.18%",
+    value: "₦0.00",
+    change: "0",
     changeType: "negative",
   },
 ];
 
 const stats2 = [
-  { name: "Loans", stat: "71,897" },
-  { name: "Expenditure", stat: "$35,000" },
-  { name: "Avg. Click Rate", stat: "24.57%" },
+  { name: "Loans", stat: "₦0.00" },
+  { name: "Expenditure", stat: "₦0.00" },
+  { name: "Outstanding", stat: "0" },
 ];
 
 function classNames(...classes) {
