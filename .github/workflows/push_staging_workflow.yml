@@ -55,6 +55,5 @@ jobs:
             
             # Install dependencies and build the React app
             npm install --legacy-peer-deps
-            npm run build
             
             echo "Deployment successful!"
