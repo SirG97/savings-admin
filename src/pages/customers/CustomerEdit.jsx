@@ -35,7 +35,7 @@ const schema = yup
   })
   .required();
 
-export default function NewCustomer() {
+export default function CustomerEdit() {
   const dispatch = useDispatch();
   const [id, setId] = useState(null);
   const [branches, setBranches] = useState([]);

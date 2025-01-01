@@ -2,7 +2,7 @@ export default function EmptyState({text}){
     return (
         <button
           type="button"
-          className="relative block w-8/12 mx-auto my-2 mt-4 rounded-lg border-2 border-dashed border-gray-300 p-12  text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          className="relative block w-8/12 mx-auto my-2 mt-4 rounded-lg  border-gray-300 p-12  text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
           <svg
             fill="none"

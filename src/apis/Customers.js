@@ -31,6 +31,34 @@ export const getCustomers = async (dispatch, params) => {
   }
 };
 
+export const getTransactionByType = async (dispatch,type, params) => {
+  
+  dispatch(actionStart());
+  try {
+    const resp = await axios.get(
+      process.env.REACT_APP_BASE_URL + `/user/transaction/type_read/${type}`,
+      {
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        params: {
+          page: params?.page,
+          size: params?.perPage,
+        },
+      },
+    );
+    dispatch(actionSuccess());
+    return resp;
+  } catch (err) {
+    dispatch(actionFailed());
+    return err;
+  }
+};
+
+
+
 export const createCustomer = async (dispatch, data) => {
   dispatch(actionStart());
   try {
@@ -80,6 +108,28 @@ export const updateCustomer = async (dispatch, data) => {
   try {
     const resp = await axios.put(
       process.env.REACT_APP_BASE_URL + `/user/customer/update`,
+      data,
+      {
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      },
+    );
+    dispatch(actionSuccess());
+    return resp;
+  } catch (err) {
+    dispatch(actionFailed());
+    return err;
+  }
+};
+
+export const createCustomerDeposit = async (dispatch, data) => {
+  dispatch(actionStart());
+  try {
+    const resp = await axios.post(
+      process.env.REACT_APP_BASE_URL + `/user/customer_transaction/create`,
       data,
       {
         headers: {

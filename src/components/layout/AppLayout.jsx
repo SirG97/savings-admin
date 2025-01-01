@@ -22,13 +22,13 @@ import {
   BanknotesIcon,
   UserGroupIcon,
   Square3Stack3DIcon,
-  ShieldCheckIcon,
+  ScaleIcon,
+  CreditCardIcon,
+  TrophyIcon,
+  TicketIcon,
 } from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-} from "@heroicons/react/20/solid";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Toaster } from "sonner";
-
 
 const userNavigation = [
   { name: "Your profile", href: "#" },
@@ -47,7 +47,7 @@ export default function AppLayout({ children }) {
       name: "Dashboard",
       href: "/",
       icon: HomeIcon,
-      current: true
+      current: true,
     },
     {
       name: "Branches",
@@ -55,7 +55,12 @@ export default function AppLayout({ children }) {
       icon: Square3Stack3DIcon,
       current: false,
     },
-    { name: "Employees", href: "/employees", icon: UsersIcon, current: false },
+    {
+      name: "Employees",
+      href: "/employees",
+      icon: UsersIcon,
+      current: false,
+    },
     {
       name: "Customers",
       href: "/customers",
@@ -63,13 +68,35 @@ export default function AppLayout({ children }) {
       current: false,
     },
     {
-      name: "Transactions",
+      name: "Deposits",
       href: "/transactions",
       icon: BanknotesIcon,
       current: false,
     },
-    { name: "Withdrawals", href: "#", icon: ShieldCheckIcon, current: false },
-    { name: "Loans", href: "#", icon: ChartPieIcon, current: false },
+    {
+      name: "Withdrawals",
+      href: "/withdrawals",
+      icon: CreditCardIcon,
+      current: false,
+    },
+    {
+      name: "Transfers",
+      href: "/transfers",
+      icon: ScaleIcon,
+      current: false,
+    },
+    {
+      name: "Commissions",
+      href: "/commissions",
+      icon: TrophyIcon,
+      current: false,
+    },
+    {
+      name: "Expenses",
+      href: "/expenses",
+      icon: TicketIcon,
+      current: false,
+    },
   ]);
 
   useEffect(() => {
@@ -85,7 +112,7 @@ export default function AppLayout({ children }) {
   }, [location.pathname]);
   return (
     <>
-      <Toaster richColors position="top-right"/>
+      <Toaster richColors position="top-right" />
       <div>
         <Dialog
           open={sidebarOpen}
@@ -127,9 +154,9 @@ export default function AppLayout({ children }) {
                   />
                 </div>
                 <nav className="flex flex-1 flex-col">
-                  <ul  className="flex flex-1 flex-col gap-y-7">
+                  <ul className="flex flex-1 flex-col gap-y-7">
                     <li>
-                      <ul  className="-mx-2 space-y-1">
+                      <ul className="-mx-2 space-y-1">
                         {navigation.map((item) => (
                           <li key={item.name}>
                             <a

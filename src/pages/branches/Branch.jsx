@@ -12,33 +12,33 @@ const secondaryNavigation = [
 const stats = [
   {
     name: "Customers",
-    value: "405",
-    change: "+4.75%",
+    value: "0",
+    change: "0",
     changeType: "positive",
   },
   {
     name: "Balance",
-    value: "$12,787.00",
-    change: "+54.02%",
+    value: "₦0.00",
+    change: "0",
     changeType: "negative",
   },
   {
     name: "Deposits",
-    value: "$245,988.00",
-    change: "-1.39%",
+    value: "₦0.00",
+    change: "0",
     changeType: "positive",
   },
   {
     name: "Withdrawals",
-    value: "$30,156.00",
-    change: "+10.18%",
+    value: "₦0.00",
+    change: "₦0.00",
     changeType: "negative",
   },
 ];
 const stats2 = [
-    { name: "Loans", stat: "71,897" },
-    { name: "Expenditure", stat: "$35,000" },
-    { name: "Avg. Click Rate", stat: "24.57%" },
+    { name: "Loans", stat: "₦0.00" },
+    { name: "Expenditure", stat: "₦0.00" },
+    { name: "Avg. Click Rate", stat: "₦0.00" },
 ];
   
 

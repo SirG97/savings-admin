@@ -19,3 +19,12 @@ export const getModelColor = (modelString) => {
   
     return modelMap[modelString] || "unknown";
 }
+
+export const getPaymentMethod = (modelString) => {
+  const modelMap = {
+    "cash": "error",
+    "bank": "primary"
+  };
+
+  return modelMap[modelString] || "unknown";
+}
