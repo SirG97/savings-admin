@@ -74,7 +74,7 @@ export default function Dashboard() {
   return (
     <AppLayout>
       <div>
-        <h3 className="text-base font-semibold text-gray-900">Last 30 days</h3>
+        <h3 className="text-base font-semibold text-gray-900">All time</h3>
         <dl className="mx-auto grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4">
           <div className="m-1 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 rounded-lg bg-white px-4 py-7 shadow sm:px-4 xl:px-5">
             <dt className="text-sm/6 font-medium text-gray-500">Customers</dt>
@@ -87,7 +87,7 @@ export default function Dashboard() {
             <dt className="text-sm/6 font-medium text-gray-500">Balance</dt>
             <dd className="text-xs font-medium text-gray-700"></dd>
             <dd className="w-full flex-none text-3xl/10 font-medium tracking-tight text-gray-900">
-              0
+              ₦{numeral(dashboardData?.balance).format("0,0.00") ?? 0.0}
             </dd>
           </div>
           <div className="m-1 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 rounded-lg bg-white px-4 py-7 shadow sm:px-4 xl:px-5">
@@ -125,7 +125,7 @@ export default function Dashboard() {
               Commissions
             </dt>
             <dd className="mt-1 text-3xl/10 font-medium tracking-tight text-gray-900">
-            ₦
+              ₦
               {numeral(
                 dashboardData?.transaction_summary?.commission?.total_amount,
               ).format("0,0.00") ?? 0.0}
@@ -136,7 +136,7 @@ export default function Dashboard() {
               Transfers
             </dt>
             <dd className="mt-1 text-3xl/10 font-medium tracking-tight text-gray-900">
-            ₦
+              ₦
               {numeral(
                 dashboardData?.transaction_summary?.transfer?.total_amount,
               ).format("0,0.00") ?? 0.0}
@@ -147,7 +147,7 @@ export default function Dashboard() {
               Expenses
             </dt>
             <dd className="mt-1 text-3xl/10 font-medium tracking-tight text-gray-900">
-            ₦
+              ₦
               {numeral(
                 dashboardData?.transaction_summary?.expenses?.total_amount,
               ).format("0,0.00") ?? 0.0}
