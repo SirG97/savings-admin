@@ -154,7 +154,7 @@ export default function EmployeesList() {
 
                       <td className="relative whitespace-nowrap py-5 pl-3 pr-2 text-center text-sm font-medium sm:pr-4">
                         <button
-                          onClick={() => navigate(`/employees/${employee.id}`)}
+                          onClick={() => navigate(`/employee/${employee.id}`)}
                           className="cursor-pointer text-indigo-600 hover:text-indigo-900"
                         >
                           Details<span className="sr-only">,{employee?.name}</span>

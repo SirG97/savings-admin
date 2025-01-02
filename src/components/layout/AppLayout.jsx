@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogBackdrop,
@@ -30,6 +32,8 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Toaster } from "sonner";
 
+import { logoutUser } from "../../redux-store/AuthSlice";
+
 const userNavigation = [
   { name: "Your profile", href: "#" },
   { name: "Sign out", href: "#" },
@@ -41,6 +45,8 @@ function classNames(...classes) {
 
 export default function AppLayout({ children }) {
   const location = useLocation();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [navigation, setNavigation] = useState([
     {
@@ -110,6 +116,20 @@ export default function AppLayout({ children }) {
 
     updateNavigation();
   }, [location.pathname]);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    dispatch(logoutUser());
+    navigate("/auth/login");
+  };
+
+  if (!localStorage.getItem("loginState")) {
+    navigate("/auth/login");
+  }
+
+
+
+
   return (
     <>
       <Toaster richColors position="top-right" />
@@ -185,8 +205,8 @@ export default function AppLayout({ children }) {
                     </li>
 
                     <li className="mt-auto">
-                      <a
-                        href="#"
+                      <button
+                        onClick={handleLogout}
                         className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white"
                       >
                         <Cog6ToothIcon
@@ -194,7 +214,7 @@ export default function AppLayout({ children }) {
                           className="size-6 shrink-0 text-indigo-200 group-hover:text-white"
                         />
                         Sign out
-                      </a>
+                      </button>
                     </li>
                   </ul>
                 </nav>
@@ -246,16 +266,17 @@ export default function AppLayout({ children }) {
                 </li>
 
                 <li className="mt-auto">
-                  <a
-                    href="#"
-                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white"
+                  <button
+                    
+                    onClick={handleLogout}
+                    className="group w-full -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white"
                   >
                     <ArrowRightStartOnRectangleIcon
                       aria-hidden="true"
                       className="size-6 shrink-0 text-indigo-200 group-hover:text-white"
                     />
                     Logout
-                  </a>
+                  </button>
                 </li>
               </ul>
             </nav>

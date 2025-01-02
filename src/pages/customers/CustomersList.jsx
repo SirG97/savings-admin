@@ -38,7 +38,7 @@ export default function CustomersList() {
 
   const fetchCustomers = (page = 1, perPage = 10) => {
     setIsLoading(true);
-    getCustomers(dispatch, { page, perPage })
+    getCustomers(dispatch, undefined, { page, perPage })
       .then((resp) => {
         if (resp?.data?.success) {
           setCustomers(resp?.data?.data?.data);

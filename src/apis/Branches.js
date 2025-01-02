@@ -20,6 +20,24 @@ export const getBranches = async (dispatch) => {
       return err
     }
 }
+export const getBranch = async (dispatch, id) => {
+  dispatch(actionStart())
+  try {
+    const resp = await axios.get(process.env.REACT_APP_BASE_URL + `/user/branch/read/${id}`, {
+      headers: {
+          'accept': 'application/json',
+          'content-type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+  })
+    dispatch(actionSuccess())
+    return resp
+    
+  } catch (err) {
+    dispatch(actionFailed())
+    return err
+  }
+}
 
 export const createBranch = async (dispatch, data) => {
   

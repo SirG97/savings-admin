@@ -1,137 +1,124 @@
-
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Toaster, toast } from "sonner";
 import AppLayout from "../../components/layout/AppLayout";
+import { ChevronDownIcon } from "@heroicons/react/16/solid";
+import { getCustomer } from "../../apis/Customers";
+import { getBranch } from "../../apis/Branches";
+import BranchOverview from "./BranchOverview";
+import BranchCustomers from "./BranchCustomers";
+import BranchDeposits from "./BranchDeposits";
+import BranchWithdrawals from "./BranchWithdrawals";
+import BranchCommissions from "./BranchCommissions";
+import BranchExpenses from "./BranchExpenses";
+import BranchTransfers from "./BranchTransfers";
 
-
-const secondaryNavigation = [
-  { name: "Overview", href: "#", current: true },
-  { name: "Customers", href: "#", current: false },
-  { name: "Deposits", href: "#", current: false },
-  { name: "Withdrawals", href: "#", current: false },
-  { name: "Expenses", href: "#", current: false },
+const tabs = [
+  { name: "Overview", href: "#overview", current: true },
+  { name: "Customers", href: "#customers", current: false },
+  { name: "Deposits", href: "#deposits", current: false },
+  { name: "Withdrawals", href: "#withdrawals", current: false },
+  { name: "Commissions", href: "#commissions", current: false },
+  { name: "Expenses", href: "#expenses", current: false },
+  { name: "Transfers", href: "#transfers", current: false },
 ];
-const stats = [
-  {
-    name: "Customers",
-    value: "0",
-    change: "0",
-    changeType: "positive",
-  },
-  {
-    name: "Balance",
-    value: "₦0.00",
-    change: "0",
-    changeType: "negative",
-  },
-  {
-    name: "Deposits",
-    value: "₦0.00",
-    change: "0",
-    changeType: "positive",
-  },
-  {
-    name: "Withdrawals",
-    value: "₦0.00",
-    change: "₦0.00",
-    changeType: "negative",
-  },
-];
-const stats2 = [
-    { name: "Loans", stat: "₦0.00" },
-    { name: "Expenditure", stat: "₦0.00" },
-    { name: "Avg. Click Rate", stat: "₦0.00" },
-];
-  
-
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Branch() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [currentTab, setCurrentTab] = useState(tabs[0]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [id, setId] = useState();
+  const [branch, setBranch] = useState();
 
+  useEffect(() => {
+    fetchBranch();
+  }, []);
+
+  const fetchBranch = () => {
+    const url = window.location.href;
+    const id = url.split("/").pop();
+    setIsLoading(true);
+    getBranch(dispatch, id)
+      .then((resp) => {
+        if (resp?.data?.success) {
+          console.log(resp?.data);
+          setId(id);
+          setBranch(resp?.data?.data);
+          setIsLoading(false);
+        } else {
+          toast.error("An error occurred. Try again!");
+        }
+      })
+      .catch(() => {
+        setIsLoading(false);
+        toast.error("An error occurred. Try again!");
+      });
+  };
+
+  const handleTabChange = (tab) => {
+    setCurrentTab(tab);
+    // Update the tabs array to reflect the change
+    tabs.forEach((t) => (t.current = t.name === tab.name));
+  };
+
+  const renderContent = () => {
+    switch (currentTab.name.toLowerCase()) {
+      case "overview":
+        return <BranchOverview branchId={id} />;
+      case "customers":
+        return <BranchCustomers branchId={id} />;
+      case "deposits":
+        return <BranchDeposits branchId={id} />;
+      case "withdrawals":
+        return <BranchWithdrawals branchId={id} />;
+      case "commissions":
+        return <BranchCommissions branchId={id} />;
+      case "expenses":
+        return <BranchExpenses branchId={id} />;
+      case "transfers":
+        return <BranchTransfers branchId={id} />;
+      default:
+        return <BranchOverview branchId={id} />;
+    }
+  };
 
   return (
     <AppLayout>
       <main className="">
-        <div className="relative isolate overflow-hidden pt-0">
-          {/* Secondary navigation */}
-          <header className="pb-4 pt-2 sm:pb-6">
-            <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-6 px-4 sm:flex-nowrap sm:px-6 lg:px-8">
-              <h1 className="text-base/7 font-semibold text-gray-900">
-                Cashflow
-              </h1>
-              <div className="order-last flex w-full gap-x-8 text-sm/6 font-semibold sm:order-none sm:w-auto sm:border-l sm:border-gray-200 sm:pl-6 sm:text-sm/7">
-                {secondaryNavigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className={
-                      item.current ? "text-indigo-600" : "text-gray-700"
-                    }
-                  >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-              {/* <a
-                href="#"
-                className="ml-auto flex items-center gap-x-1 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                <PlusSmallIcon aria-hidden="true" className="-ml-1.5 size-5" />
-                New invoice
-              </a> */}
-            </div>
-          </header>
-
-          {/* Stats */}
-          <div>
-           
-            <dl className="mx-auto grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4">
-              {stats.map((stat) => (
-                <div
-                  key={stat.name}
-                  className="m-1 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 rounded-lg bg-white px-4 py-7 shadow sm:px-4 xl:px-5"
+        <div className="mb-4">
+          <h1 className="pb-1 text-2xl font-semibold">{branch?.name} branch</h1>
+          <h1 className="text-md pb-4">{branch?.address}</h1>
+          <div className="overflow-x-auto">
+            <nav aria-label="Tabs" className="flex space-x-4">
+              {tabs.map((tab) => (
+                <a
+                  key={tab.name}
+                  href={tab.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleTabChange(tab);
+                  }}
+                  aria-current={tab.current ? "page" : undefined}
+                  className={classNames(
+                    tab.current
+                      ? "bg-indigo-100 text-indigo-700"
+                      : "text-gray-500 hover:text-gray-700",
+                    "rounded-md px-3 py-2 text-sm font-medium",
+                  )}
                 >
-                  <dt className="text-sm/6 font-medium text-gray-500">
-                    {stat.name}
-                  </dt>
-                  <dd
-                    className={classNames(
-                      stat.changeType === "negative"
-                        ? "text-rose-600"
-                        : "text-gray-700",
-                      "text-xs font-medium",
-                    )}
-                  >
-                    {stat.change}
-                  </dd>
-                  <dd className="w-full flex-none text-3xl/10 font-medium tracking-tight text-gray-900">
-                    {stat.value}
-                  </dd>
-                </div>
+                  {tab.name}
+                </a>
               ))}
-            </dl>
-          </div>
-          <div>
-            <dl className="mt-5 grid grid-cols-1 gap-0 sm:grid-cols-3">
-              {stats2.map((item) => (
-                <div
-                  key={item.name}
-                  className="mx-1 overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6"
-                >
-                  <dt className="truncate text-sm font-medium text-gray-500">
-                    {item.name}
-                  </dt>
-                  <dd className="mt-1 text-3xl/10 font-medium tracking-tight text-gray-900">
-                    {item.stat}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            </nav>
           </div>
         </div>
-
-        
+        {renderContent()}
       </main>
     </AppLayout>
   );

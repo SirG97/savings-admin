@@ -21,6 +21,25 @@ export const getEmployees = async (dispatch) => {
     }
 }
 
+export const getEmployee = async (dispatch, id) => {
+  dispatch(actionStart())
+  try {
+    const resp = await axios.get(process.env.REACT_APP_BASE_URL + `/user/users/read/${id}`, {
+      headers: {
+          'accept': 'application/json',
+          'content-type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+  })
+    dispatch(actionSuccess())
+    return resp
+    
+  } catch (err) {
+    dispatch(actionFailed())
+    return err
+  }
+}
+
 export const createEmployee = async (dispatch, data) => {
   
     dispatch(actionStart())

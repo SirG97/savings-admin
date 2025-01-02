@@ -5,12 +5,17 @@ import {
 } from "../redux-store/ActionSlice";
 import axios from "axios";
 
-export const getCustomers = async (dispatch, params) => {
+export const getCustomers = async (dispatch, id = undefined, params) => {
   
   dispatch(actionStart());
   try {
-    const resp = await axios.get(
-      process.env.REACT_APP_BASE_URL + "/user/customer/read",
+    let url;
+    if (id) {
+      url = process.env.REACT_APP_BASE_URL + `/user/customer/branch_read/${id}`;
+    } else {
+      url = process.env.REACT_APP_BASE_URL + `/user/customer/read`;
+    }
+    const resp = await axios.get(url,
       {
         headers: {
           accept: "application/json",
@@ -31,12 +36,38 @@ export const getCustomers = async (dispatch, params) => {
   }
 };
 
-export const getTransactionByType = async (dispatch,type, params) => {
+export const getTransactionByType = async (dispatch, type, params) => {
   
   dispatch(actionStart());
   try {
     const resp = await axios.get(
       process.env.REACT_APP_BASE_URL + `/user/transaction/type_read/${type}`,
+      {
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        params: {
+          page: params?.page,
+          size: params?.perPage,
+        },
+      },
+    );
+    dispatch(actionSuccess());
+    return resp;
+  } catch (err) {
+    dispatch(actionFailed());
+    return err;
+  }
+};
+
+export const getTransactionByTypeAndBranchId = async (dispatch,branchId, type, params) => {
+  
+  dispatch(actionStart());
+  try {
+    const resp = await axios.get(
+      process.env.REACT_APP_BASE_URL + `/user/transaction/branch_read/${type}/${branchId}`,
       {
         headers: {
           accept: "application/json",

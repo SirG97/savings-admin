@@ -12,6 +12,7 @@ import Login from './pages/auth/Login';
 // import { jwtDecode } from "jwt-decode";
 import Branch from './pages/branches/Branch';
 import Employees from './pages/employees/Employees';
+import Employee from './pages/employees/Employee';
 import Customers from './pages/customers/Customers';
 import NewCustomer from './pages/customers/NewCustomer';
 import Customer from './pages/customers/Customer';
@@ -77,7 +78,7 @@ const App = () => {
         <Route exact path="/branches" element={<Branches />} />
         <Route exact path="/branches/:id" element={<Branch />} />
         <Route exact path="/employees" element={<Employees />} />
-        <Route exact path="/employee/:id" element={<Employees />} />
+        <Route exact path="/employee/:id" element={<Employee />} />
         <Route exact path="/customers" element={<Customers />} />
         <Route exact path="/customers/new" element={<NewCustomer />} />
         <Route exact path="/customer/:id" element={<Customer />} />

@@ -5,48 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import numeral from "numeral";
-import LoadingIcon from "../../components/loaders/LoadingIcon";
-import EmptyState from "../../components/loaders/EmptyState";
-import StatusWithDot from "../../components/badges/StatusWithDot";
-
 import AppLayout from "../../components/layout/AppLayout";
-
-const stats = [
-  {
-    name: "Customers",
-    value: "0",
-    change: "",
-    changeType: "positive",
-  },
-  {
-    name: "Balance",
-    value: "₦0.00",
-    change: "0",
-    changeType: "negative",
-  },
-  {
-    name: "Deposits",
-    value: "₦0.00",
-    change: "0",
-    changeType: "positive",
-  },
-  {
-    name: "Withdrawals",
-    value: "₦0.00",
-    change: "0",
-    changeType: "negative",
-  },
-];
-
-const stats2 = [
-  { name: "Loans", stat: "₦0.00" },
-  { name: "Expenditure", stat: "₦0.00" },
-  { name: "Outstanding", stat: "0" },
-];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function Dashboard() {
   const dispatch = useDispatch();
