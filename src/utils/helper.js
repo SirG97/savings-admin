@@ -1,7 +1,7 @@
 export const getModelType = (modelString) => {
     const modelMap = {
       "App\\Models\\SuperAdmin": "super admin",
-      "App\\Models\\Admin": "admin",
+      "App\\Models\\Admin": "manager",
       "App\\Models\\Auditor": "auditor",
       "App\\Models\\Marketer": "marketer"
     };

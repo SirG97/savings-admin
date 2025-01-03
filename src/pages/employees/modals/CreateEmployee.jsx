@@ -146,7 +146,7 @@ export default function CreateEmployee({ active, onClose, onCreated }) {
                 <div className="">
                   <Select
                     options={[
-                      { value: "admin", label: "Admin" },
+                      { value: "admin", label: "Manager" },
                       { value: "marketer", label: "Marketer" },
                       { value: "auditor", label: "Auditor" },
                     ]}
