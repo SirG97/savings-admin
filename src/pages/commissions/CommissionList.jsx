@@ -124,13 +124,13 @@ export default function CommissionList() {
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    Deposited for
+                    Deducted from
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    Deposited by
+                    Deducted by
                   </th>
                   <th
                     scope="col"

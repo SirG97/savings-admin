@@ -32,7 +32,8 @@ export default function Login() {
         dispatch(setLoginState(localStorage.getItem("loginState")));
         navigate("/");
       } else {
-        toast.error("An error occurred. Try again!");
+        
+        toast.error(resp.response?.data?.data?.message);
       }
     });
   };

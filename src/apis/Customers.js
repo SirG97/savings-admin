@@ -156,7 +156,7 @@ export const updateCustomer = async (dispatch, data) => {
   }
 };
 
-export const createCustomerDeposit = async (dispatch, data) => {
+export const createTransaction = async (dispatch, data) => {
   dispatch(actionStart());
   try {
     const resp = await axios.post(

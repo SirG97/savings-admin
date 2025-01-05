@@ -24,6 +24,7 @@ import Withdrawal from './pages/withdrawals/Withdrawal';
 import Commission from './pages/commissions/Commission';
 import Transfer from './pages/transfers/Transfers';
 import Expenses from './pages/expenses/Exepenses';
+import CustomerDeductCommission from './pages/customers/CustomerDeductCommission';
 
 const App = () => {
     const dispatch = useDispatch()
@@ -85,6 +86,7 @@ const App = () => {
         <Route exact path="/customer/:id/edit" element={<CustomerEdit />} />
         <Route exact path="/customer/:id/deposit" element={<CustomerDeposit />} />
         <Route exact path="/customer/:id/withdraw" element={<CustomerWithdraw />} />
+        <Route exact path="/customer/:id/commission" element={<CustomerDeductCommission/>} />
         <Route exact path="/transactions" element={<Transactions />} />
         <Route exact path="/deposits" element={<Deposit />} />
         <Route exact path="/withdrawals" element={<Withdrawal />} />

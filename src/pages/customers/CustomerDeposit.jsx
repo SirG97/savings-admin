@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { TextInput } from "../../components/inputs/TextInput";
-import { getCustomer, createCustomerDeposit } from "../../apis/Customers";
+import { getCustomer, createTransaction } from "../../apis/Customers";
 import { toast } from "sonner";
 import Select from "../../components/inputs/Select";
 import AppLayout from "../../components/layout/AppLayout";
@@ -39,7 +39,7 @@ export default function CustomerDeposit() {
       customer_id: id,
       transaction_type: "deposit",
       amount: "",
-      payment_method:"",
+      payment_method: "",
       description: "",
     },
   });
@@ -72,13 +72,13 @@ export default function CustomerDeposit() {
         setIsLoading(false);
         toast.error("An error occurred. Try again!");
       });
-      setIsLoading(false);
+    setIsLoading(false);
   };
 
   const handleCustomerDeposit = (data) => {
     data.customer_id = id;
 
-    createCustomerDeposit(dispatch, data).then((resp) => {
+    createTransaction(dispatch, data).then((resp) => {
       if (resp.data?.success) {
         reset({
           transaction_type: "deposit",
@@ -87,7 +87,7 @@ export default function CustomerDeposit() {
           description: "",
           date: "",
         });
-        fetchCustomer(id)
+        fetchCustomer(id);
         toast.success(resp?.data.message);
       } else {
         toast.error(resp.response.data.message);

@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { TextInput } from "../../components/inputs/TextInput";
-import { getCustomer, createCustomerDeposit } from "../../apis/Customers";
+import { getCustomer, createTransaction } from "../../apis/Customers";
 import { toast } from "sonner";
 import Select from "../../components/inputs/Select";
 import AppLayout from "../../components/layout/AppLayout";
@@ -39,7 +39,7 @@ export default function CustomerWithdraw() {
       customer_id: id,
       transaction_type: "withdrawal",
       amount: "",
-      payment_method:"",
+      payment_method: "",
       description: "",
     },
   });
@@ -72,13 +72,13 @@ export default function CustomerWithdraw() {
         setIsLoading(false);
         toast.error("An error occurred. Try again!");
       });
-      setIsLoading(false);
+    setIsLoading(false);
   };
 
   const handleCustomerDeposit = (data) => {
     data.customer_id = id;
 
-    createCustomerDeposit(dispatch, data).then((resp) => {
+    createTransaction(dispatch, data).then((resp) => {
       if (resp.data?.success) {
         reset({
           transaction_type: "deposit",
@@ -87,7 +87,7 @@ export default function CustomerWithdraw() {
           description: "",
           date: "",
         });
-        fetchCustomer(id)
+        fetchCustomer(id);
         toast.success(resp?.data.message);
       } else {
         toast.error(resp.response.data.message);
@@ -101,7 +101,9 @@ export default function CustomerWithdraw() {
         {/* <Toaster position="top-right" richColors /> */}
         <div className="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
           <div className="px-4 sm:px-0">
-            <h2 className="text-base/7 font-semibold text-gray-900">Withdraw</h2>
+            <h2 className="text-base/7 font-semibold text-gray-900">
+              Withdraw
+            </h2>
             <p className="mt-1 text-sm/6 text-gray-600">
               Enter the amount you want to withdraw for customer. All fields
               marked asterisk(*) are required

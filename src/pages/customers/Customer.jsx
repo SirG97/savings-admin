@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  CheckIcon,
-  LinkIcon,
-  PencilIcon,
-} from "@heroicons/react/20/solid";
+import { CheckIcon, LinkIcon, PencilIcon } from "@heroicons/react/20/solid";
+import { TrophyIcon } from "@heroicons/react/24/outline";
 import { getCustomer } from "../../apis/Customers";
 import { toast } from "sonner";
 import AppLayout from "../../components/layout/AppLayout";
@@ -107,6 +104,19 @@ export default function Customer() {
                 className="-ml-0.5 mr-1.5 size-5 text-gray-400"
               />
               Withdraw
+            </button>
+          </span>
+          <span className="ml-3">
+            <button
+              type="button"
+              onClick={() => navigate(`/customer/${id}/commission`)}
+              className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            >
+              <TrophyIcon
+                aria-hidden="true"
+                className="-ml-0.5 mr-1.5 size-5 text-gray-400"
+              />
+              Commission
             </button>
           </span>
 
