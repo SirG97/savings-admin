@@ -24,10 +24,13 @@ export default function Dashboard() {
       .catch((error) => {
         toast.error("An error occurred. Try again!");
       });
+    
   };
 
   useEffect(() => {
+    
     handleDashboardData();
+
   }, []);
 
   return (
