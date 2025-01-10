@@ -1,6 +1,5 @@
-import { EyeIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import Authlayout from "../../components/layout/AuthLayout";
 import { loginUser } from "../../apis/Authentication";
@@ -9,7 +8,7 @@ import {
   setUserToken,
   setLoginState,
 } from "../../redux-store/AuthSlice";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -33,7 +32,8 @@ export default function Login() {
         dispatch(setLoginState(localStorage.getItem("loginState")));
         navigate("/");
       } else {
-        toast.error("An error occurred. Try again!");
+        
+        toast.error(resp.response?.data?.data?.message);
       }
     });
   };

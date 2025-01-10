@@ -1,7 +1,7 @@
 export default function StatusWithDot({ status, text }) {
   return (
     <>
-      {status == "success" && (
+      {status === "success" && (
         <span className="inline-flex items-center gap-x-1.5 rounded-md bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
           <svg
             viewBox="0 0 6 6"
@@ -14,7 +14,7 @@ export default function StatusWithDot({ status, text }) {
         </span>
       )}
 
-      {status == "danger" && (
+      {status === "danger" && (
         <span className="inline-flex items-center gap-x-1.5 rounded-md bg-red-100 px-2 py-1 text-xs font-medium text-red-700">
           <svg
             viewBox="0 0 6 6"
@@ -27,7 +27,7 @@ export default function StatusWithDot({ status, text }) {
         </span>
       )}
 
-      {status == "warning" && (
+      {status === "warning" && (
         <span className="inline-flex items-center gap-x-1.5 rounded-md bg-yellow-100 px-2 py-1 text-xs font-medium text-yellow-800">
           <svg
             viewBox="0 0 6 6"
@@ -40,7 +40,7 @@ export default function StatusWithDot({ status, text }) {
         </span>
       )}
 
-{status == "primary" && (
+{status === "primary" && (
         <span className="inline-flex items-center gap-x-1.5 rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700">
           <svg
             viewBox="0 0 6 6"
@@ -54,7 +54,7 @@ export default function StatusWithDot({ status, text }) {
       )}
 
 
-{status == "secondary" && (
+{status === "secondary" && (
         <span className="inline-flex items-center gap-x-1.5 rounded-md bg-indigo-100 px-2 py-1 text-xs font-medium text-indigo-700">
           <svg
             viewBox="0 0 6 6"
@@ -67,7 +67,7 @@ export default function StatusWithDot({ status, text }) {
         </span>
       )}
 
-      {status == "unknown" && (
+      {status === "unknown" && (
         <span className="inline-flex items-center gap-x-1.5 rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600">
           <svg
             viewBox="0 0 6 6"
@@ -83,7 +83,7 @@ export default function StatusWithDot({ status, text }) {
 
 
 
-      {status == "purple" && (
+      {status === "purple" && (
         <span className="inline-flex items-center gap-x-1.5 rounded-md bg-purple-100 px-2 py-1 text-xs font-medium text-purple-700">
           <svg
             viewBox="0 0 6 6"
@@ -96,7 +96,7 @@ export default function StatusWithDot({ status, text }) {
         </span>
       )}
 
-      {status == "error" && (
+      {status === "error" && (
         <span className="inline-flex items-center gap-x-1.5 rounded-md bg-pink-100 px-2 py-1 text-xs font-medium text-pink-700">
           <svg
             viewBox="0 0 6 6"

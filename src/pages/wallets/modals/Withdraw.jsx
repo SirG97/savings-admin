@@ -1,13 +1,10 @@
-import { Button, Checkbox, Label, Modal } from "flowbite-react";
-import { useState, useEffect } from "react";
+import { Button, Modal } from "flowbite-react";
+import { useState } from "react";
 import {TextInput} from "../../../components/inputs/TextInput";
 import SelectInput from "../../../components/inputs/SelectInput";
 
 export default function Withdraw({ active, onClose }) {
-  const [email, setEmail] = useState("");
   const [firstStep, setFirstStep] = useState(true);
-  const [secondStep, setSecondStep] = useState(false);
-
   function onCloseModal() {
     setFirstStep(true);
     onClose();

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogBackdrop,
@@ -13,33 +15,25 @@ import {
 import {
   Bars3Icon,
   BellIcon,
-  CalendarIcon,
   ChartPieIcon,
   Cog6ToothIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
   HomeIcon,
   UsersIcon,
   XMarkIcon,
-  BuildingStorefrontIcon,
   ArrowRightStartOnRectangleIcon,
   BanknotesIcon,
   UserGroupIcon,
   Square3Stack3DIcon,
   ScaleIcon,
-  ShieldCheckIcon,
+  CreditCardIcon,
+  TrophyIcon,
+  TicketIcon,
 } from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/20/solid";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Toaster } from "sonner";
 
-const teams = [
-  { id: 1, name: "Heroicons", href: "#", initial: "H", current: false },
-  { id: 2, name: "Tailwind Labs", href: "#", initial: "T", current: false },
-  { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
-];
+import { logoutUser } from "../../redux-store/AuthSlice";
+
 const userNavigation = [
   { name: "Your profile", href: "#" },
   { name: "Sign out", href: "#" },
@@ -51,13 +45,15 @@ function classNames(...classes) {
 
 export default function AppLayout({ children }) {
   const location = useLocation();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [navigation, setNavigation] = useState([
     {
       name: "Dashboard",
       href: "/",
       icon: HomeIcon,
-      current: true
+      current: true,
     },
     {
       name: "Branches",
@@ -65,7 +61,12 @@ export default function AppLayout({ children }) {
       icon: Square3Stack3DIcon,
       current: false,
     },
-    { name: "Staff", href: "/staff", icon: UsersIcon, current: false },
+    {
+      name: "Employees",
+      href: "/employees",
+      icon: UsersIcon,
+      current: false,
+    },
     {
       name: "Customers",
       href: "/customers",
@@ -73,13 +74,35 @@ export default function AppLayout({ children }) {
       current: false,
     },
     {
-      name: "Transactions",
+      name: "Deposits",
       href: "/transactions",
       icon: BanknotesIcon,
       current: false,
     },
-    { name: "Withdrawals", href: "#", icon: ShieldCheckIcon, current: false },
-    { name: "Loans", href: "#", icon: ChartPieIcon, current: false },
+    {
+      name: "Withdrawals",
+      href: "/withdrawals",
+      icon: CreditCardIcon,
+      current: false,
+    },
+    {
+      name: "Transfers",
+      href: "/transfers",
+      icon: ScaleIcon,
+      current: false,
+    },
+    {
+      name: "Commissions",
+      href: "/commissions",
+      icon: TrophyIcon,
+      current: false,
+    },
+    {
+      name: "Expenses",
+      href: "/expenses",
+      icon: TicketIcon,
+      current: false,
+    },
   ]);
 
   useEffect(() => {
@@ -93,9 +116,23 @@ export default function AppLayout({ children }) {
 
     updateNavigation();
   }, [location.pathname]);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    dispatch(logoutUser());
+    navigate("/auth/login");
+  };
+
+  if (!localStorage.getItem("loginState")) {
+    navigate("/auth/login");
+  }
+
+
+
+
   return (
     <>
-      <Toaster richColors position="top-right"/>
+      <Toaster richColors position="top-right" />
       <div>
         <Dialog
           open={sidebarOpen}
@@ -137,9 +174,9 @@ export default function AppLayout({ children }) {
                   />
                 </div>
                 <nav className="flex flex-1 flex-col">
-                  <ul role="list" className="flex flex-1 flex-col gap-y-7">
+                  <ul className="flex flex-1 flex-col gap-y-7">
                     <li>
-                      <ul role="list" className="-mx-2 space-y-1">
+                      <ul className="-mx-2 space-y-1">
                         {navigation.map((item) => (
                           <li key={item.name}>
                             <a
@@ -168,8 +205,8 @@ export default function AppLayout({ children }) {
                     </li>
 
                     <li className="mt-auto">
-                      <a
-                        href="#"
+                      <button
+                        onClick={handleLogout}
                         className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white"
                       >
                         <Cog6ToothIcon
@@ -177,7 +214,7 @@ export default function AppLayout({ children }) {
                           className="size-6 shrink-0 text-indigo-200 group-hover:text-white"
                         />
                         Sign out
-                      </a>
+                      </button>
                     </li>
                   </ul>
                 </nav>
@@ -229,16 +266,17 @@ export default function AppLayout({ children }) {
                 </li>
 
                 <li className="mt-auto">
-                  <a
-                    href="#"
-                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white"
+                  <button
+                    
+                    onClick={handleLogout}
+                    className="group w-full -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white"
                   >
                     <ArrowRightStartOnRectangleIcon
                       aria-hidden="true"
                       className="size-6 shrink-0 text-indigo-200 group-hover:text-white"
                     />
                     Logout
-                  </a>
+                  </button>
                 </li>
               </ul>
             </nav>

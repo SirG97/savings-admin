@@ -2,12 +2,9 @@ import { useState, useEffect } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { TextInput } from "../../components/inputs/TextInput";
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import { ChevronDownIcon } from "@heroicons/react/16/solid";
 import {
-  createCustomer,
   getCustomer,
   updateCustomer,
 } from "../../apis/Customers";
@@ -38,20 +35,16 @@ const schema = yup
   })
   .required();
 
-export default function NewCustomer() {
+export default function CustomerEdit() {
   const dispatch = useDispatch();
   const [id, setId] = useState(null);
   const [branches, setBranches] = useState([]);
   const [employees, setEmployees] = useState([]);
-  const [customer, setCustomer] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const {
-    control,
     register,
     handleSubmit,
-    watch,
     reset,
-    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),

@@ -3,12 +3,11 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import CreateEmployee from "./modals/CreateEmployee";
 import { getEmployees } from "../../apis/Employees";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Toaster, toast } from "sonner";
 import numeral from "numeral";
 import LoadingIcon from "../../components/loaders/LoadingIcon";
 import EmptyState from "../../components/loaders/EmptyState";
-import StatusBadge from "../../components/badges/Status";
 import StatusWithDot from "../../components/badges/StatusWithDot";
 import { getModelType, getModelColor } from "../../utils/helper";
 
@@ -22,9 +21,10 @@ export default function EmployeesList() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+
     fetchLatestEmployees();
   
-  }, []);
+  },[]);
 
   const fetchLatestEmployees = () => {
     setIsLoading(true);
@@ -153,12 +153,12 @@ export default function EmployeesList() {
                       </td>
 
                       <td className="relative whitespace-nowrap py-5 pl-3 pr-2 text-center text-sm font-medium sm:pr-4">
-                        <a
-                          onClick={() => navigate(`/employees/${employee.id}`)}
+                        <button
+                          onClick={() => navigate(`/employee/${employee.id}`)}
                           className="cursor-pointer text-indigo-600 hover:text-indigo-900"
                         >
                           Details<span className="sr-only">,{employee?.name}</span>
-                        </a>
+                        </button>
                       </td>
                     </tr>
                   ))}

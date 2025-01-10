@@ -1,18 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { PaperClipIcon } from "@heroicons/react/20/solid";
-import {
-  BriefcaseIcon,
-  CalendarIcon,
-  CheckIcon,
-  ChevronDownIcon,
-  CurrencyDollarIcon,
-  LinkIcon,
-  MapPinIcon,
-  PencilIcon,
-} from "@heroicons/react/20/solid";
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { CheckIcon, LinkIcon, PencilIcon } from "@heroicons/react/20/solid";
+import { TrophyIcon } from "@heroicons/react/24/outline";
 import { getCustomer } from "../../apis/Customers";
 import { toast } from "sonner";
 import AppLayout from "../../components/layout/AppLayout";
@@ -20,26 +10,26 @@ import AppLayout from "../../components/layout/AppLayout";
 const stats = [
   {
     name: "Balance",
-    value: "$405,091.00",
-    change: "+4.75%",
+    value: "₦0.00",
+    change: "0",
     changeType: "positive",
   },
   {
     name: "Total Deposit",
-    value: "$12,787.00",
-    change: "+54.02%",
+    value: "₦0.00",
+    change: "0",
     changeType: "negative",
   },
   {
     name: "Total Withdrawal",
-    value: "$245,988.00",
-    change: "-1.39%",
+    value: "₦0.00",
+    change: "0",
     changeType: "positive",
   },
   {
     name: "Outstanding Loan",
-    value: "$0.00",
-    change: "+10.18%",
+    value: "₦0.00",
+    change: "0",
     changeType: "negative",
   },
 ];
@@ -99,13 +89,14 @@ export default function Customer() {
                 aria-hidden="true"
                 className="-ml-0.5 mr-1.5 size-5 text-gray-400"
               />
-              Edit
+              Edit Profile
             </button>
           </span>
 
           <span className="ml-3">
             <button
               type="button"
+              onClick={() => navigate(`/customer/${id}/withdraw`)}
               className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
             >
               <LinkIcon
@@ -115,14 +106,28 @@ export default function Customer() {
               Withdraw
             </button>
           </span>
+          <span className="ml-3">
+            <button
+              type="button"
+              onClick={() => navigate(`/customer/${id}/commission`)}
+              className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            >
+              <TrophyIcon
+                aria-hidden="true"
+                className="-ml-0.5 mr-1.5 size-5 text-gray-400"
+              />
+              Commission
+            </button>
+          </span>
 
           <span className="ml-2">
             <button
               type="button"
+              onClick={() => navigate(`/customer/${id}/deposit`)}
               className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               <CheckIcon aria-hidden="true" className="-ml-0.5 mr-1.5 size-5" />
-              Save
+              Deposit
             </button>
           </span>
         </div>

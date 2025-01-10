@@ -1,6 +1,8 @@
-export default function AuthLayout({children, header}) {
+import { Toaster } from "sonner"
+export default function AuthLayout({ children, header }) {
   return (
     <>
+      <Toaster richColors position="top-right" />
       {/*
         This example requires updating your template:
 

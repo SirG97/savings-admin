@@ -4,7 +4,7 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import CreateBranch from "./modals/CreateBranch";
 import { getBranches } from "../../apis/Branches";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Toaster, toast } from "sonner";
 import numeral from "numeral";
 import LoadingIcon from "../../components/loaders/LoadingIcon";
@@ -148,12 +148,12 @@ export default function BranchesList() {
                       </td>
 
                       <td className="relative whitespace-nowrap py-5 pl-3 pr-2 text-center text-sm font-medium sm:pr-4">
-                        <a
+                        <button
                           onClick={() => navigate(`/branches/${branch.id}`)}
                           className="cursor-pointer text-indigo-600 hover:text-indigo-900"
                         >
                           Details<span className="sr-only">,{branch.name}</span>
-                        </a>
+                        </button>
                       </td>
                     </tr>
                   ))}

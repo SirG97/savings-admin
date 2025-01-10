@@ -1,14 +1,12 @@
-import { useState, useEffect, useCallback } from "react";
-import { Button, Checkbox, Label, Modal } from "flowbite-react";
+import { useState, useCallback } from "react";
+import { Button, Modal } from "flowbite-react";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import {TextInput} from "../../../components/inputs/TextInput";
-import SelectInput from "../../../components/inputs/SelectInput";
+// import SelectInput from "../../../components/inputs/SelectInput";
 import TextInputDropdown from "../../../components/inputs/TextInputDropdown";
 
 export default function FundWallet({ active, onClose }) {
-  const [email, setEmail] = useState("");
   const [firstStep, setFirstStep] = useState(true);
-  const [secondStep, setSecondStep] = useState(false);
   function onCloseModal() {
     setFirstStep(true);
     onClose();
@@ -21,7 +19,7 @@ export default function FundWallet({ active, onClose }) {
         <Modal.Header />
         <Modal.Body>
           <div className="space-y-3">
-            {firstStep == true && (
+            {firstStep === true && (
               <div>
                 <h3 className="text-xl font-medium text-center text-gray-900 dark:text-white">
                   Comfirm Wallet Funding
@@ -111,10 +109,10 @@ export default function FundWallet({ active, onClose }) {
                 </div>
                 <div className="flex justify-center -mt text-xs font-normal text-gray-500 dark:text-gray-300">
                   <span>No reference number? </span>{" "}
-                  <a href="#" className="text-indigo-500">
+                  <button className="text-indigo-500">
                     {" "}
                     Inititate deposit
-                  </a>
+                  </button>
                 </div>
               </div>
             )}

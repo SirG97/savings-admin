@@ -1,4 +1,3 @@
-import { useState } from "react";
 import BranchesList from "./BranchesList";
 
 import AppLayout from "../../components/layout/AppLayout";

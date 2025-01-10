@@ -1,90 +1,119 @@
-import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
-import {
-  CursorArrowRaysIcon,
-  EnvelopeOpenIcon,
-  UsersIcon,
-} from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
+
+import { getDashboardData } from "../../apis/Dashboard";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toast } from "sonner";
+import numeral from "numeral";
 import AppLayout from "../../components/layout/AppLayout";
 
-const stats = [
-  {
-    name: "Customers",
-    value: "405,091.00",
-    change: "+4.75%",
-    changeType: "positive",
-  },
-  {
-    name: "Balance",
-    value: "$1,120,000.00",
-    change: "+54.02%",
-    changeType: "negative",
-  },
-  {
-    name: "Deposits",
-    value: "$245,988.00",
-    change: "-1.39%",
-    changeType: "positive",
-  },
-  {
-    name: "Withdrawals",
-    value: "$30,156.00",
-    change: "+10.18%",
-    changeType: "negative",
-  },
-];
-
-const stats2 = [
-  { name: "Loans", stat: "71,897" },
-  { name: "Expenditure", stat: "$35,000" },
-  { name: "Avg. Click Rate", stat: "24.57%" },
-];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Dashboard() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [dashboardData, setDashboardData] = useState([]);
+
+  const handleDashboardData = () => {
+    getDashboardData(dispatch)
+      .then((resp) => {
+        if (resp?.data?.success) {
+          setDashboardData(resp?.data?.data);
+        } else {
+          toast.error("An error occurred. Try again!");
+        }
+      })
+      .catch((error) => {
+        toast.error("An error occurred. Try again!");
+      });
+  };
+
+  useEffect(() => {
+    handleDashboardData();
+  }, []);
+
   return (
     <AppLayout>
       <div>
-      <h3 className="text-base font-semibold text-gray-900">Last 30 days</h3>
-        <dl className="mx-auto  grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div
-              key={stat.name}
-              className="m-1 flex shadow flex-wrap items-baseline justify-between gap-x-4 gap-y-2 rounded-lg bg-white px-4 py-7 sm:px-4 xl:px-5"
-            >
-              <dt className="text-sm/6 font-medium text-gray-500">
-                {stat.name}
-              </dt>
-              <dd
-                className={classNames(
-                  stat.changeType === "negative"
-                    ? "text-rose-600"
-                    : "text-gray-700",
-                  "text-xs font-medium",
-                )}
-              >
-                {stat.change}
-              </dd>
-              <dd className="w-full flex-none text-3xl/10 font-medium tracking-tight text-gray-900">
-                {stat.value}
-              </dd>
-            </div>
-          ))}
+        <h3 className="text-base font-semibold text-gray-900">All time</h3>
+        <dl className="mx-auto grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4">
+          <div className="m-1 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 rounded-lg bg-white px-4 py-7 shadow sm:px-4 xl:px-5">
+            <dt className="text-sm/6 font-medium text-gray-500">Customers</dt>
+            <dd className="text-xs font-medium text-gray-700"></dd>
+            <dd className="w-full flex-none text-3xl/10 font-medium tracking-tight text-gray-900">
+              {dashboardData?.total_users ?? 0}
+            </dd>
+          </div>
+          <div className="m-1 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 rounded-lg bg-white px-4 py-7 shadow sm:px-4 xl:px-5">
+            <dt className="text-sm/6 font-medium text-gray-500">Balance</dt>
+            <dd className="text-xs font-medium text-gray-700"></dd>
+            <dd className="w-full flex-none text-3xl/10 font-medium tracking-tight text-gray-900">
+              ₦{numeral(dashboardData?.balance).format("0,0.00") ?? 0.0}
+            </dd>
+          </div>
+          <div className="m-1 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 rounded-lg bg-white px-4 py-7 shadow sm:px-4 xl:px-5">
+            <dt className="text-sm/6 font-medium text-gray-500">
+              Total Deposit
+            </dt>
+            <dd className="text-xs font-medium text-gray-700">
+              {dashboardData?.transaction_summary?.deposit?.count ?? 0}
+            </dd>
+            <dd className="w-full flex-none text-3xl/10 font-medium tracking-tight text-gray-900">
+              ₦
+              {numeral(
+                dashboardData?.transaction_summary?.deposit?.total_amount,
+              ).format("0,0.00") ?? 0.0}
+            </dd>
+          </div>
+          <div className="m-1 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 rounded-lg bg-white px-4 py-7 shadow sm:px-4 xl:px-5">
+            <dt className="text-sm/6 font-medium text-gray-500">Withdrawals</dt>
+            <dd className="text-xs font-medium text-gray-700">
+              {dashboardData?.transaction_summary?.withdrawals?.count}
+            </dd>
+            <dd className="w-full flex-none text-3xl/10 font-medium tracking-tight text-gray-900">
+              ₦
+              {numeral(
+                dashboardData?.transaction_summary?.withdrawals?.total_amount,
+              ).format("0,0.00") ?? 0.0}
+            </dd>
+          </div>
         </dl>
       </div>
       <div>
-      
-      <dl className="mt-5 grid grid-cols-1 gap-0 sm:grid-cols-3">
-        {stats2.map((item) => (
-          <div key={item.name} className="overflow-hidden rounded-lg mx-1 bg-white px-4 py-5 shadow sm:p-6">
-            <dt className="truncate text-sm font-medium text-gray-500">{item.name}</dt>
-            <dd className="mt-1 text-3xl/10 font-medium tracking-tight text-gray-900">{item.stat}</dd>
+        <dl className="mt-5 grid grid-cols-1 gap-0 sm:grid-cols-3">
+          <div className="mx-1 overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+            <dt className="truncate text-sm font-medium text-gray-500">
+              Commissions
+            </dt>
+            <dd className="mt-1 text-3xl/10 font-medium tracking-tight text-gray-900">
+              ₦
+              {numeral(
+                dashboardData?.transaction_summary?.commission?.total_amount,
+              ).format("0,0.00") ?? 0.0}
+            </dd>
           </div>
-        ))}
-      </dl>
-    </div>
+          <div className="mx-1 overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+            <dt className="truncate text-sm font-medium text-gray-500">
+              Transfers
+            </dt>
+            <dd className="mt-1 text-3xl/10 font-medium tracking-tight text-gray-900">
+              ₦
+              {numeral(
+                dashboardData?.transaction_summary?.transfer?.total_amount,
+              ).format("0,0.00") ?? 0.0}
+            </dd>
+          </div>
+          <div className="mx-1 overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+            <dt className="truncate text-sm font-medium text-gray-500">
+              Expenses
+            </dt>
+            <dd className="mt-1 text-3xl/10 font-medium tracking-tight text-gray-900">
+              ₦
+              {numeral(
+                dashboardData?.transaction_summary?.expenses?.total_amount,
+              ).format("0,0.00") ?? 0.0}
+            </dd>
+          </div>
+        </dl>
+      </div>
     </AppLayout>
   );
 }
