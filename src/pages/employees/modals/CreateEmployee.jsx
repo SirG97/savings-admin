@@ -184,6 +184,7 @@ export default function CreateEmployee({ active, onClose, onCreated }) {
                     </label>
                   </div>
                 )}
+                
                 <div className="w-full">
                   <button
                     type="submit"
