@@ -27,22 +27,22 @@ jobs:
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
-          port: ${{ secrets.PORT }}  # SSH port for Namecheap shared hosting
+          port: ${{ secrets.PORT }} # SSH port for Namecheap shared hosting
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
             # Navigate to deployment directory
             cd ~/admin.divineglobalgrowth.com
-            
+
             # Initialize Git repository if not already done
             if [ ! -d ".git" ]; then
               git init
               git remote add origin https://github.com/SirG97/savings-admin.git
             fi
 
-            # Pull latest code from the staging branch
+            # Pull latest code from the main branch
             git fetch origin
-            git reset --hard origin/staging
-            
-            
+            git reset --hard origin/main
+
+
             echo "Deployment successful!"
