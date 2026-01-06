@@ -175,7 +175,6 @@ export default function CommissionList() {
                       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                         {deposit?.reference}
                       </td>
-
                       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                         ₦{numeral(deposit?.amount).format("0,0.00")}
                       </td>
@@ -231,3 +230,4 @@ export default function CommissionList() {
     </div>
   );
 }
+
