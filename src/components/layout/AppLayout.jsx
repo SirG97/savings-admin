@@ -31,7 +31,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Toaster } from "sonner";
-
+import logo from "../../assets/logos/profile.png"
 import { logoutUser } from "../../redux-store/AuthSlice";
 
 const userNavigation = [
@@ -169,9 +169,10 @@ export default function AppLayout({ children }) {
                 <div className="flex h-16 shrink-0 items-center">
                   <img
                     alt="Your Company"
-                    src="https://tailwindui.com/plus/img/logos/mark.svg?color=white"
+                    src={logo}
                     className="h-8 w-auto"
                   />
+                  <p className="text-white text-xs">Manager</p>
                 </div>
                 <nav className="flex flex-1 flex-col">
                   <ul className="flex flex-1 flex-col gap-y-7">
@@ -230,7 +231,7 @@ export default function AppLayout({ children }) {
             <div className="flex h-16 shrink-0 items-center">
               <img
                 alt="Your Company"
-                src="https://tailwindui.com/plus/img/logos/mark.svg?color=white"
+                src={logo}
                 className="h-8 w-auto"
               />
             </div>

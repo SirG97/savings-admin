@@ -25,6 +25,7 @@ const schema = yup
       // .matches(/(admin|marketer)/,"")
       .required("user type is required"),
     branch_id: yup.string().required("Branch is required"),
+    loan_manager: yup.boolean(),
   })
   .required();
 
@@ -35,10 +36,13 @@ export default function CreateEmployee({ active, onClose, onCreated }) {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const selectedModel = watch("model");
 
   function onCloseModal() {
     onClose();
@@ -46,18 +50,24 @@ export default function CreateEmployee({ active, onClose, onCreated }) {
 
   useEffect(() => {
     fetchBranches();
-  },[]);
+  }, []);
 
   const handleCreateEmployee = (data) => {
-    createEmployee(dispatch, data).then((resp) => {
+    // Ensure loan_manager is sent as boolean
+    const submitData = {
+      ...data,
+      loan_manager: data.loan_manager || false,
+    };
+    createEmployee(dispatch, submitData).then((resp) => {
       if (resp.data?.success) {
-        console.log(data);
+        console.log(submitData);
         reset({
           first_name: "",
           last_name: "",
           email: "",
           phone: "",
           model: "",
+          loan_manager: false,
         });
         onClose(); // Close the modal
         onCreated();
@@ -158,6 +168,22 @@ export default function CreateEmployee({ active, onClose, onCreated }) {
                     label="User type"
                   />
                 </div>
+                {selectedModel === "admin" && (
+                  <div className="my-4 flex items-center">
+                    <input
+                      {...register("loan_manager")}
+                      type="checkbox"
+                      id="loan_manager"
+                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                    />
+                    <label
+                      htmlFor="loan_manager"
+                      className="ml-3 text-sm font-medium text-gray-700"
+                    >
+                      Loan Manager
+                    </label>
+                  </div>
+                )}
                 <div className="w-full">
                   <button
                     type="submit"

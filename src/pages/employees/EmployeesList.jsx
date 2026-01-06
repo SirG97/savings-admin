@@ -21,9 +21,7 @@ export default function EmployeesList() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-
     fetchLatestEmployees();
-  
   },[]);
 
   const fetchLatestEmployees = () => {
@@ -94,6 +92,12 @@ export default function EmployeesList() {
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
+                    Loan Manager
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
                     Email
                   </th>
                   <th
@@ -140,9 +144,12 @@ export default function EmployeesList() {
                       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                         <StatusWithDot status={getModelColor(employee.model)} text={getModelType(employee.model)}/>
                       </td>
-                      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                      {employee?.email}
-                      </td>
+                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                        {employee?.loan_manager ? 'Yes' : 'No'}
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                        {employee?.email}
+                        </td>
                       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                       {employee?.phone}
                       </td>
